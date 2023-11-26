@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34310.174
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kysect.PlantUmlBuilder", "Kysect.PlantUmlBuilder\Kysect.PlantUmlBuilder.csproj", "{883CE670-7419-41AD-AA4A-0D724C03BE3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kysect.PlantUmlBuilder.Tests", "Kysect.PlantUmlBuilder.Tests\Kysect.PlantUmlBuilder.Tests.csproj", "{5FF3F69B-77AB-4712-B236-96128E8B3FD5}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{883CE670-7419-41AD-AA4A-0D724C03BE3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{883CE670-7419-41AD-AA4A-0D724C03BE3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{883CE670-7419-41AD-AA4A-0D724C03BE3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{883CE670-7419-41AD-AA4A-0D724C03BE3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FF3F69B-77AB-4712-B236-96128E8B3FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FF3F69B-77AB-4712-B236-96128E8B3FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FF3F69B-77AB-4712-B236-96128E8B3FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FF3F69B-77AB-4712-B236-96128E8B3FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
