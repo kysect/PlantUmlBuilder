@@ -1,0 +1,9 @@
+<Project>
+    <PropertyGroup>
+        <Authors>Kysect</Authors>
+		<Company>Kysect</Company>
+
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+</Project>
