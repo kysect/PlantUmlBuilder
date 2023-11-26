@@ -2,13 +2,13 @@
 
 namespace Kysect.PlantUmlBuilder.Syntax;
 
-public class ObjectSyntaxNode : PlantUmlSyntaxNode
+public class IdentifierSyntaxNode : PlantUmlSyntaxNode
 {
-    public IdentifierSyntaxNode Identifier { get; }
+    public string Name { get; }
 
-    public ObjectSyntaxNode(IdentifierSyntaxNode identifier)
+    public IdentifierSyntaxNode(string name)
     {
-        Identifier = identifier;
+        Name = name;
     }
 
     public override ImmutableArray<PlantUmlSyntaxNode> GetChild()

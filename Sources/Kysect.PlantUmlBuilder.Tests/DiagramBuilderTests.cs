@@ -38,7 +38,35 @@ public class DiagramBuilderTests
                           """;
 
         var tree = new DiagramSyntaxTree()
-            .AddChild(new ObjectSyntaxNode("ObjectName"));
+            .AddChild(new ObjectSyntaxNode(new IdentifierSyntaxNode("ObjectName")));
+
+        string? result = _builder.Build(tree);
+
+        result.Should().Be(expected);
+    }
+
+    [Test]
+    public void Build_AfterAddingObjectAndRelation_ReturnExpectedOutput()
+    {
+        string expected = """
+                          @startuml
+                          object First { }
+                          object Second { }
+                          First --> Second
+                          @enduml
+                          """;
+
+        var firstIdentifier = new IdentifierSyntaxNode("First");
+        var secondIdentifier = new IdentifierSyntaxNode("Second");
+
+        var tree = new DiagramSyntaxTree()
+            .AddChild(new ObjectSyntaxNode(firstIdentifier))
+            .AddChild(new ObjectSyntaxNode(secondIdentifier))
+            .AddChild(
+                new RelationSyntaxNode(
+                    firstIdentifier,
+                    new RelationArrowSyntaxNode(isDotted: false, locationDirection: null, RelationType.DirectedRelation),
+                    secondIdentifier));
 
         string? result = _builder.Build(tree);
 
