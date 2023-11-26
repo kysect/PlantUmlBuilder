@@ -27,4 +27,21 @@ public class DiagramBuilderTests
 
         result.Should().Be(expected);
     }
+
+    [Test]
+    public void Build_AfterAddingObject_ReturnStringWithObject()
+    {
+        string expected = """
+                          @startuml
+                          object ObjectName { }
+                          @enduml
+                          """;
+
+        var tree = new DiagramSyntaxTree()
+            .AddChild(new ObjectSyntaxNode("ObjectName"));
+
+        string? result = _builder.Build(tree);
+
+        result.Should().Be(expected);
+    }
 }
