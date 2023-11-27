@@ -12,7 +12,7 @@ public class IdentifierSyntaxNode : PlantUmlSyntaxNode
         Name = name;
     }
 
-    public override ImmutableArray<PlantUmlSyntaxNode> GetChild()
+    public override ImmutableArray<PlantUmlSyntaxNode> GetChildren()
     {
         return ImmutableArray<PlantUmlSyntaxNode>.Empty;
     }

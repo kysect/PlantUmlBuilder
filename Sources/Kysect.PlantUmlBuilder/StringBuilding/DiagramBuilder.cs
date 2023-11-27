@@ -15,7 +15,7 @@ public class DiagramBuilder : IDiagramBuilder
 
         stringBuilder.AppendLine(PlantUmlConstants.StartUml);
 
-        foreach (PlantUmlSyntaxNode plantUmlSyntaxNode in tree.Child)
+        foreach (PlantUmlSyntaxNode plantUmlSyntaxNode in tree.Children)
             visitor.Visit(plantUmlSyntaxNode);
 
         stringBuilder.AppendLine(PlantUmlConstants.EndUml);

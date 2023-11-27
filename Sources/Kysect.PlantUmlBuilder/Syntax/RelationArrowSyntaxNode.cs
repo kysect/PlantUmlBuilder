@@ -17,7 +17,7 @@ public class RelationArrowSyntaxNode : PlantUmlSyntaxNode
         RelationType = relationType;
     }
 
-    public override ImmutableArray<PlantUmlSyntaxNode> GetChild()
+    public override ImmutableArray<PlantUmlSyntaxNode> GetChildren()
     {
         return ImmutableArray<PlantUmlSyntaxNode>.Empty;
     }

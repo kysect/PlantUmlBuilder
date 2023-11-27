@@ -5,7 +5,7 @@ namespace Kysect.PlantUmlBuilder.Syntax;
 
 public class DiagramSyntaxTree
 {
-    public ImmutableArray<PlantUmlSyntaxNode> Child { get; }
+    public ImmutableArray<PlantUmlSyntaxNode> Children { get; }
 
     public DiagramSyntaxTree() : this(ImmutableArray<PlantUmlSyntaxNode>.Empty)
     {
@@ -13,11 +13,11 @@ public class DiagramSyntaxTree
 
     public DiagramSyntaxTree(ImmutableArray<PlantUmlSyntaxNode> child)
     {
-        Child = child.ThrowIfNull();
+        Children = child.ThrowIfNull();
     }
 
     public DiagramSyntaxTree AddChild(PlantUmlSyntaxNode node)
     {
-        return new DiagramSyntaxTree(Child.Add(node));
+        return new DiagramSyntaxTree(Children.Add(node));
     }
 }

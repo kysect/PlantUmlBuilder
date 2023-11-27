@@ -16,7 +16,7 @@ public class RelationSyntaxNode : PlantUmlSyntaxNode
         Right = right;
     }
 
-    public override ImmutableArray<PlantUmlSyntaxNode> GetChild()
+    public override ImmutableArray<PlantUmlSyntaxNode> GetChildren()
     {
         return ImmutableArray<PlantUmlSyntaxNode>.Empty;
     }
