@@ -35,6 +35,12 @@ public class DiagramBuilderSyntaxVisitor : PlantUmlSyntaxVisitor
         base.VisitClassSyntaxNode(classSyntaxNode);
     }
 
+    public override void VisitPackageSyntaxNode(PackageSyntaxNode packageSyntaxNode)
+    {
+        VisitTypeDeclarationSyntaxNode(packageSyntaxNode);
+        base.VisitPackageSyntaxNode(packageSyntaxNode);
+    }
+
     public override void VisitRelationSyntaxNode(RelationSyntaxNode relationSyntaxNode)
     {
         relationSyntaxNode.ThrowIfNull();

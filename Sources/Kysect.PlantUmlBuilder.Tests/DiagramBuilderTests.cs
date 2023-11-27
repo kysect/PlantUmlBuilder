@@ -24,9 +24,8 @@ public class DiagramBuilderTests
                           """;
 
         var tree = new DiagramSyntaxTree();
-        string? result = _builder.Build(tree);
 
-        result.Should().Be(expected);
+        Verify(tree, expected);
     }
 
     [Test]
@@ -41,9 +40,7 @@ public class DiagramBuilderTests
         var tree = new DiagramSyntaxTree()
             .AddChild(new ObjectSyntaxNode(new IdentifierSyntaxNode("ObjectName")));
 
-        string? result = _builder.Build(tree);
-
-        result.Should().Be(expected);
+        Verify(tree, expected);
     }
 
     [Test]
@@ -58,9 +55,22 @@ public class DiagramBuilderTests
         var tree = new DiagramSyntaxTree()
             .AddChild(new ClassSyntaxNode(new IdentifierSyntaxNode("TypeName")));
 
-        string? result = _builder.Build(tree);
+        Verify(tree, expected);
+    }
 
-        result.Should().Be(expected);
+    [Test]
+    public void Build_AfterAddingPackage_ReturnStringWithPackage()
+    {
+        string expected = """
+                          @startuml
+                          package TypeName { }
+                          @enduml
+                          """;
+
+        var tree = new DiagramSyntaxTree()
+            .AddChild(new PackageSyntaxNode(new IdentifierSyntaxNode("TypeName")));
+
+        Verify(tree, expected);
     }
 
     [Test]
@@ -86,6 +96,11 @@ public class DiagramBuilderTests
                     new RelationArrowSyntaxNode(isDotted: false, locationDirection: null, RelationType.DirectedRelation),
                     secondIdentifier));
 
+        Verify(tree, expected);
+    }
+
+    private void Verify(DiagramSyntaxTree tree, string expected)
+    {
         string? result = _builder.Build(tree);
 
         result.Should().Be(expected);

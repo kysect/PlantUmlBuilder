@@ -9,5 +9,7 @@ public enum TypeDeclarationType
     [EnumStringValue("object")]
     Object,
     [EnumStringValue("class")]
-    Class
+    Class,
+    [EnumStringValue("package")]
+    Package
 }

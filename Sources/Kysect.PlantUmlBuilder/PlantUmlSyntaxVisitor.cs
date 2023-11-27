@@ -29,6 +29,12 @@ public abstract class PlantUmlSyntaxVisitor
         VisitDefault(classSyntaxNode);
     }
 
+    public virtual void VisitPackageSyntaxNode(PackageSyntaxNode packageSyntaxNode)
+    {
+        packageSyntaxNode.ThrowIfNull();
+        VisitDefault(packageSyntaxNode);
+    }
+
     public virtual void VisitRelationSyntaxNode(RelationSyntaxNode relationSyntaxNode)
     {
         relationSyntaxNode.ThrowIfNull();
