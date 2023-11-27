@@ -13,15 +13,15 @@ public class DiagramBuilderSyntaxVisitor : PlantUmlSyntaxVisitor
         _stringBuilder = stringBuilder;
     }
 
-    public override void Visit(IdentifierSyntaxNode identifierSyntaxNode)
+    public override void VisitIdentifierSyntaxNode(IdentifierSyntaxNode identifierSyntaxNode)
     {
         identifierSyntaxNode.ThrowIfNull();
 
         _stringBuilder.Append(identifierSyntaxNode.Name);
-        base.Visit(identifierSyntaxNode);
+        base.VisitIdentifierSyntaxNode(identifierSyntaxNode);
     }
 
-    public override void Visit(ObjectSyntaxNode objectSyntaxNode)
+    public override void VisitObjectSyntaxNode(ObjectSyntaxNode objectSyntaxNode)
     {
         objectSyntaxNode.ThrowIfNull();
 
@@ -31,20 +31,20 @@ public class DiagramBuilderSyntaxVisitor : PlantUmlSyntaxVisitor
             .Append(" { }")
             .AppendLine();
 
-        base.Visit(objectSyntaxNode);
+        base.VisitObjectSyntaxNode(objectSyntaxNode);
     }
 
-    public override void Visit(RelationSyntaxNode relationSyntaxNode)
+    public override void VisitRelationSyntaxNode(RelationSyntaxNode relationSyntaxNode)
     {
         relationSyntaxNode.ThrowIfNull();
 
         Visit(relationSyntaxNode.Left);
-        Visit(relationSyntaxNode.Arrow);
+        VisitRelationArrowSyntaxNode(relationSyntaxNode.Arrow);
         Visit(relationSyntaxNode.Right);
         _stringBuilder.AppendLine();
     }
 
-    public override void Visit(RelationArrowSyntaxNode relationArrowSyntaxNode)
+    public override void VisitRelationArrowSyntaxNode(RelationArrowSyntaxNode relationArrowSyntaxNode)
     {
         relationArrowSyntaxNode.ThrowIfNull();
 

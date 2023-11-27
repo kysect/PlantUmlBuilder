@@ -1,5 +1,4 @@
 ﻿using Kysect.CommonLib.BaseTypes.Extensions;
-using Kysect.CommonLib.Exceptions;
 using Kysect.PlantUmlBuilder.Syntax;
 
 namespace Kysect.PlantUmlBuilder;
@@ -8,53 +7,37 @@ public abstract class PlantUmlSyntaxVisitor
 {
     public void Visit(PlantUmlSyntaxNode node)
     {
-        switch (node)
-        {
-            case IdentifierSyntaxNode identifierSyntaxNode:
-                Visit(identifierSyntaxNode);
-                break;
-            case ObjectSyntaxNode objectSyntaxNode:
-                Visit(objectSyntaxNode);
-                break;
-            case RelationSyntaxNode relationSyntaxNode:
-                Visit(relationSyntaxNode);
-                break;
-            case RelationArrowSyntaxNode relationArrowSyntaxNode:
-                Visit(relationArrowSyntaxNode);
-                break;
-
-            default:
-                throw SwitchDefaultExceptions.OnUnexpectedType(node);
-        }
+        node.ThrowIfNull();
+        node.Visit(this);
     }
 
-    public virtual void Visit(IdentifierSyntaxNode identifierSyntaxNode)
+    public virtual void VisitIdentifierSyntaxNode(IdentifierSyntaxNode identifierSyntaxNode)
     {
         identifierSyntaxNode.ThrowIfNull();
-        VisitChild(identifierSyntaxNode);
+        VisitDefault(identifierSyntaxNode);
     }
 
-    public virtual void Visit(ObjectSyntaxNode objectSyntaxNode)
+    public virtual void VisitObjectSyntaxNode(ObjectSyntaxNode objectSyntaxNode)
     {
         objectSyntaxNode.ThrowIfNull();
-        VisitChild(objectSyntaxNode);
+        VisitDefault(objectSyntaxNode);
     }
 
-    public virtual void Visit(RelationSyntaxNode relationSyntaxNode)
+    public virtual void VisitRelationSyntaxNode(RelationSyntaxNode relationSyntaxNode)
     {
         relationSyntaxNode.ThrowIfNull();
-        VisitChild(relationSyntaxNode);
+        VisitDefault(relationSyntaxNode);
     }
 
-    public virtual void Visit(RelationArrowSyntaxNode relationArrowSyntaxNode)
+    public virtual void VisitRelationArrowSyntaxNode(RelationArrowSyntaxNode relationArrowSyntaxNode)
     {
         relationArrowSyntaxNode.ThrowIfNull();
-        VisitChild(relationArrowSyntaxNode);
+        VisitDefault(relationArrowSyntaxNode);
     }
 
-    private void VisitChild(PlantUmlSyntaxNode node)
+    private void VisitDefault(PlantUmlSyntaxNode node)
     {
         foreach (PlantUmlSyntaxNode syntaxNode in node.GetChild())
-            Visit(syntaxNode);
+            syntaxNode.Visit(this);
     }
 }
