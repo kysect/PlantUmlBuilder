@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Kysect.PlantUmlBuilder.StringBuilding;
 using Kysect.PlantUmlBuilder.Syntax;
+using Kysect.PlantUmlBuilder.Syntax.Enums;
 
 namespace Kysect.PlantUmlBuilder.Tests;
 
@@ -39,6 +40,23 @@ public class DiagramBuilderTests
 
         var tree = new DiagramSyntaxTree()
             .AddChild(new ObjectSyntaxNode(new IdentifierSyntaxNode("ObjectName")));
+
+        string? result = _builder.Build(tree);
+
+        result.Should().Be(expected);
+    }
+
+    [Test]
+    public void Build_AfterAddingClass_ReturnStringWithObject()
+    {
+        string expected = """
+                          @startuml
+                          class TypeName { }
+                          @enduml
+                          """;
+
+        var tree = new DiagramSyntaxTree()
+            .AddChild(new ClassSyntaxNode(new IdentifierSyntaxNode("TypeName")));
 
         string? result = _builder.Build(tree);
 

@@ -1,12 +1,12 @@
-using Kysect.CommonLib.BaseTypes.Extensions;
+﻿using Kysect.CommonLib.BaseTypes.Extensions;
 using Kysect.PlantUmlBuilder.Syntax.Enums;
 using System.Collections.Immutable;
 
 namespace Kysect.PlantUmlBuilder.Syntax;
 
-public class ObjectSyntaxNode : TypeDeclarationSyntaxNode
+public class ClassSyntaxNode : TypeDeclarationSyntaxNode
 {
-    public ObjectSyntaxNode(IdentifierSyntaxNode identifier) : base(TypeDeclarationType.Object, identifier)
+    public ClassSyntaxNode(IdentifierSyntaxNode identifier) : base(TypeDeclarationType.Class, identifier)
     {
     }
 
@@ -18,6 +18,6 @@ public class ObjectSyntaxNode : TypeDeclarationSyntaxNode
     public override void Visit(PlantUmlSyntaxVisitor visitor)
     {
         visitor.ThrowIfNull();
-        visitor.VisitObjectSyntaxNode(this);
+        visitor.VisitClassSyntaxNode(this);
     }
 }

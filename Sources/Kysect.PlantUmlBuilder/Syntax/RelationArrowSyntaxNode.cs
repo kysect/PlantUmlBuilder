@@ -1,4 +1,5 @@
-﻿using Kysect.CommonLib.BaseTypes.Extensions;
+using Kysect.CommonLib.BaseTypes.Extensions;
+using Kysect.PlantUmlBuilder.Syntax.Enums;
 using System.Collections.Immutable;
 
 namespace Kysect.PlantUmlBuilder.Syntax;

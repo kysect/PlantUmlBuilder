@@ -1,4 +1,4 @@
-﻿using Kysect.CommonLib.BaseTypes.Extensions;
+using Kysect.CommonLib.BaseTypes.Extensions;
 using Kysect.PlantUmlBuilder.Syntax;
 
 namespace Kysect.PlantUmlBuilder;
@@ -21,6 +21,12 @@ public abstract class PlantUmlSyntaxVisitor
     {
         objectSyntaxNode.ThrowIfNull();
         VisitDefault(objectSyntaxNode);
+    }
+
+    public virtual void VisitClassSyntaxNode(ClassSyntaxNode classSyntaxNode)
+    {
+        classSyntaxNode.ThrowIfNull();
+        VisitDefault(classSyntaxNode);
     }
 
     public virtual void VisitRelationSyntaxNode(RelationSyntaxNode relationSyntaxNode)

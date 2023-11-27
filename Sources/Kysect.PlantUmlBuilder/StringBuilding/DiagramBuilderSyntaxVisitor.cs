@@ -1,5 +1,7 @@
-﻿using Kysect.CommonLib.BaseTypes.Extensions;
+using Kysect.CommonLib.BaseTypes;
+using Kysect.CommonLib.BaseTypes.Extensions;
 using Kysect.PlantUmlBuilder.Syntax;
+using Kysect.PlantUmlBuilder.Syntax.Enums;
 using System.Text;
 
 namespace Kysect.PlantUmlBuilder.StringBuilding;
@@ -23,15 +25,14 @@ public class DiagramBuilderSyntaxVisitor : PlantUmlSyntaxVisitor
 
     public override void VisitObjectSyntaxNode(ObjectSyntaxNode objectSyntaxNode)
     {
-        objectSyntaxNode.ThrowIfNull();
-
-        _stringBuilder.Append("object ");
-        Visit(objectSyntaxNode.Identifier);
-        _stringBuilder
-            .Append(" { }")
-            .AppendLine();
-
+        VisitTypeDeclarationSyntaxNode(objectSyntaxNode);
         base.VisitObjectSyntaxNode(objectSyntaxNode);
+    }
+
+    public override void VisitClassSyntaxNode(ClassSyntaxNode classSyntaxNode)
+    {
+        VisitTypeDeclarationSyntaxNode(classSyntaxNode);
+        base.VisitClassSyntaxNode(classSyntaxNode);
     }
 
     public override void VisitRelationSyntaxNode(RelationSyntaxNode relationSyntaxNode)
@@ -57,6 +58,19 @@ public class DiagramBuilderSyntaxVisitor : PlantUmlSyntaxVisitor
             .Append(arrowChar)
             .Append(ToArrowString(relationArrowSyntaxNode.RelationType))
             .Append(' ');
+    }
+
+    private void VisitTypeDeclarationSyntaxNode(TypeDeclarationSyntaxNode typeDeclarationSyntaxNode)
+    {
+        typeDeclarationSyntaxNode.ThrowIfNull();
+
+        _stringBuilder
+            .Append(EnumStringValue.ToEnumString(typeDeclarationSyntaxNode.Type))
+            .Append(' ');
+        Visit(typeDeclarationSyntaxNode.Identifier);
+        _stringBuilder
+            .Append(" { }")
+            .AppendLine();
     }
 
     private string ToDiagramSymbol(RelationSuggestLocationDirection? directory)

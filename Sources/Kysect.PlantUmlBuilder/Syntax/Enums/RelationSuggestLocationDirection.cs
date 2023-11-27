@@ -1,4 +1,4 @@
-﻿namespace Kysect.PlantUmlBuilder.Syntax;
+﻿namespace Kysect.PlantUmlBuilder.Syntax.Enums;
 
 public enum RelationSuggestLocationDirection
 {
