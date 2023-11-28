@@ -3,6 +3,7 @@
         <Authors>Kysect</Authors>
 		<Company>Kysect</Company>
 
+	    <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
