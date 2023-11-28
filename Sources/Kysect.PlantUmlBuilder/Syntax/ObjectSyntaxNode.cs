@@ -3,12 +3,8 @@ using Kysect.PlantUmlBuilder.Syntax.Enums;
 
 namespace Kysect.PlantUmlBuilder.Syntax;
 
-public class ObjectSyntaxNode : TypeDeclarationSyntaxNode
+public record ObjectSyntaxNode(IdentifierSyntaxNode Identifier) : TypeDeclarationSyntaxNode(TypeDeclarationType.Object, Identifier)
 {
-    public ObjectSyntaxNode(IdentifierSyntaxNode identifier) : base(TypeDeclarationType.Object, identifier)
-    {
-    }
-
     public override void Visit(PlantUmlSyntaxVisitor visitor)
     {
         visitor.ThrowIfNull();

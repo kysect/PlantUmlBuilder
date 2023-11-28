@@ -93,7 +93,7 @@ public class DiagramBuilderTests
             .AddChild(
                 new RelationSyntaxNode(
                     firstIdentifier,
-                    new RelationArrowSyntaxNode(isDotted: false, locationDirection: null, RelationType.DirectedRelation),
+                    new RelationArrowSyntaxNode(IsDotted: false, LocationDirection: null, RelationType.DirectedRelation),
                     secondIdentifier));
 
         Verify(tree, expected);

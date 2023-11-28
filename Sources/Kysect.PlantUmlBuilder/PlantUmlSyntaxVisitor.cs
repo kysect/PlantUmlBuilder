@@ -49,7 +49,7 @@ public abstract class PlantUmlSyntaxVisitor
 
     private void VisitDefault(PlantUmlSyntaxNode node)
     {
-        foreach (PlantUmlSyntaxNode syntaxNode in node.GetChildren())
+        foreach (PlantUmlSyntaxNode syntaxNode in node.Children)
             syntaxNode.Visit(this);
     }
 }

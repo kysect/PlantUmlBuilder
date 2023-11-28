@@ -3,27 +3,13 @@ using System.Collections.Immutable;
 
 namespace Kysect.PlantUmlBuilder.Syntax;
 
-public abstract class TypeDeclarationSyntaxNode : PlantUmlSyntaxNode
+public abstract record TypeDeclarationSyntaxNode(
+    TypeDeclarationType Type,
+    IdentifierSyntaxNode Identifier,
+    ImmutableArray<PlantUmlSyntaxNode> Children) : PlantUmlSyntaxNode(Children)
 {
-    public TypeDeclarationType Type { get; }
-    public IdentifierSyntaxNode Identifier { get; }
-    public ImmutableArray<PlantUmlSyntaxNode> Children { get; }
-
     protected TypeDeclarationSyntaxNode(TypeDeclarationType type, IdentifierSyntaxNode identifier)
+        : this(type, identifier, [])
     {
-        Type = type;
-        Identifier = identifier;
-    }
-
-    protected TypeDeclarationSyntaxNode(TypeDeclarationType type, IdentifierSyntaxNode identifier, ImmutableArray<PlantUmlSyntaxNode> children)
-    {
-        Type = type;
-        Identifier = identifier;
-        Children = children;
-    }
-
-    public override ImmutableArray<PlantUmlSyntaxNode> GetChildren()
-    {
-        return Children;
     }
 }
