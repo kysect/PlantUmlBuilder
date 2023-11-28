@@ -54,6 +54,28 @@ public class DiagramBuilderSyntaxVisitor : PlantUmlSyntaxVisitor
         ContinueVisitRelationArrowSyntaxNode(relationArrowSyntaxNode);
     }
 
+    public override void VisitTypeFieldSyntaxNode(TypeFieldSyntaxNode typeFieldSyntaxNode)
+    {
+        typeFieldSyntaxNode.ThrowIfNull();
+        _stringBuilder.PrepareForNextElement();
+
+        ContinueVisitIdentifierSyntaxNode(typeFieldSyntaxNode.Identifier);
+        _stringBuilder.Append(": ");
+        ContinueVisitIdentifierSyntaxNode(typeFieldSyntaxNode.Type);
+        base.VisitTypeFieldSyntaxNode(typeFieldSyntaxNode);
+    }
+
+    public override void VisitTypeMethodSyntaxNode(TypeMethodSyntaxNode typeMethodSyntaxNode)
+    {
+        typeMethodSyntaxNode.ThrowIfNull();
+        _stringBuilder.PrepareForNextElement();
+
+        ContinueVisitIdentifierSyntaxNode(typeMethodSyntaxNode.Identifier);
+        _stringBuilder.Append("(): ");
+        ContinueVisitIdentifierSyntaxNode(typeMethodSyntaxNode.Type);
+        base.VisitTypeMethodSyntaxNode(typeMethodSyntaxNode);
+    }
+
     private void VisitTypeDeclarationSyntaxNode(TypeDeclarationSyntaxNode typeDeclarationSyntaxNode)
     {
         typeDeclarationSyntaxNode.ThrowIfNull();

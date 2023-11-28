@@ -3,9 +3,9 @@ using Kysect.PlantUmlBuilder.Syntax;
 
 namespace Kysect.PlantUmlBuilder.SyntaxTreeBuilding;
 
-public static class PackageSyntaxNodeBuildingExtensions
+public static class ClassSyntaxNodeBuildingExtensions
 {
-    public static PackageSyntaxNode AddChild(this PackageSyntaxNode syntaxNode, PlantUmlSyntaxNode child)
+    public static ClassSyntaxNode AddChild(this ClassSyntaxNode syntaxNode, PlantUmlSyntaxNode child)
     {
         syntaxNode.ThrowIfNull();
         child.ThrowIfNull();

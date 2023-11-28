@@ -38,7 +38,7 @@ public class DiagramBuilderTests
                           @enduml
                           """;
 
-        var tree = new DiagramSyntaxTree()
+        DiagramSyntaxTree tree = new DiagramSyntaxTree()
             .AddChild(new ObjectSyntaxNode(new IdentifierSyntaxNode("ObjectName")));
 
         Verify(tree, expected);
@@ -53,7 +53,7 @@ public class DiagramBuilderTests
                           @enduml
                           """;
 
-        var tree = new DiagramSyntaxTree()
+        DiagramSyntaxTree tree = new DiagramSyntaxTree()
             .AddChild(new ClassSyntaxNode(new IdentifierSyntaxNode("TypeName")));
 
         Verify(tree, expected);
@@ -68,7 +68,7 @@ public class DiagramBuilderTests
                           @enduml
                           """;
 
-        var tree = new DiagramSyntaxTree()
+        DiagramSyntaxTree tree = new DiagramSyntaxTree()
             .AddChild(new PackageSyntaxNode(new IdentifierSyntaxNode("TypeName")));
 
         Verify(tree, expected);
@@ -85,10 +85,31 @@ public class DiagramBuilderTests
                           @enduml
                           """;
 
-        var tree = new DiagramSyntaxTree()
+        DiagramSyntaxTree tree = new DiagramSyntaxTree()
             .AddChild(
                 new PackageSyntaxNode(new IdentifierSyntaxNode("A"))
-                    .AddMember(new PackageSyntaxNode(new IdentifierSyntaxNode("B"))));
+                    .AddChild(new PackageSyntaxNode(new IdentifierSyntaxNode("B"))));
+
+        Verify(tree, expected);
+    }
+
+    [Test]
+    public void Build_ClassWithMethodAndField_RenderCorrectly()
+    {
+        string expected = $$"""
+                            @startuml
+                            class A {
+                            {{'\t'}}Do(): int[]
+                            {{'\t'}}Name: string
+                            }
+                            @enduml
+                            """;
+
+        DiagramSyntaxTree tree = new DiagramSyntaxTree()
+            .AddChild(
+                new ClassSyntaxNode(new IdentifierSyntaxNode("A"))
+                    .AddChild(new TypeMethodSyntaxNode(new IdentifierSyntaxNode("Do"), new IdentifierSyntaxNode("int[]")))
+                    .AddChild(new TypeFieldSyntaxNode(new IdentifierSyntaxNode("Name"), new IdentifierSyntaxNode("string"))));
 
         Verify(tree, expected);
     }
@@ -107,7 +128,7 @@ public class DiagramBuilderTests
         var firstIdentifier = new IdentifierSyntaxNode("First");
         var secondIdentifier = new IdentifierSyntaxNode("Second");
 
-        var tree = new DiagramSyntaxTree()
+        DiagramSyntaxTree tree = new DiagramSyntaxTree()
             .AddChild(new ObjectSyntaxNode(firstIdentifier))
             .AddChild(new ObjectSyntaxNode(secondIdentifier))
             .AddChild(

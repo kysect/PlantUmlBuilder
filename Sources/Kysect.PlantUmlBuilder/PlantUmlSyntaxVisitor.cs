@@ -47,6 +47,18 @@ public abstract class PlantUmlSyntaxVisitor
         VisitDefault(relationArrowSyntaxNode);
     }
 
+    public virtual void VisitTypeFieldSyntaxNode(TypeFieldSyntaxNode typeFieldSyntaxNode)
+    {
+        typeFieldSyntaxNode.ThrowIfNull();
+        VisitDefault(typeFieldSyntaxNode);
+    }
+
+    public virtual void VisitTypeMethodSyntaxNode(TypeMethodSyntaxNode typeMethodSyntaxNode)
+    {
+        typeMethodSyntaxNode.ThrowIfNull();
+        VisitDefault(typeMethodSyntaxNode);
+    }
+
     public void VisitDefault(PlantUmlSyntaxNode node)
     {
         node.ThrowIfNull();
