@@ -2,15 +2,14 @@ using Kysect.CommonLib.BaseTypes;
 using Kysect.CommonLib.BaseTypes.Extensions;
 using Kysect.PlantUmlBuilder.Syntax;
 using Kysect.PlantUmlBuilder.Syntax.Enums;
-using System.Text;
 
 namespace Kysect.PlantUmlBuilder.StringBuilding;
 
 public class DiagramBuilderSyntaxVisitor : PlantUmlSyntaxVisitor
 {
-    private readonly StringBuilder _stringBuilder;
+    private readonly SyntaxStringBuilder _stringBuilder;
 
-    public DiagramBuilderSyntaxVisitor(StringBuilder stringBuilder)
+    public DiagramBuilderSyntaxVisitor(SyntaxStringBuilder stringBuilder)
     {
         _stringBuilder = stringBuilder;
     }
@@ -18,43 +17,80 @@ public class DiagramBuilderSyntaxVisitor : PlantUmlSyntaxVisitor
     public override void VisitIdentifierSyntaxNode(IdentifierSyntaxNode identifierSyntaxNode)
     {
         identifierSyntaxNode.ThrowIfNull();
-
-        _stringBuilder.Append(identifierSyntaxNode.Name);
-        base.VisitIdentifierSyntaxNode(identifierSyntaxNode);
+        _stringBuilder.PrepareForNextElement();
+        ContinueVisitIdentifierSyntaxNode(identifierSyntaxNode);
     }
 
     public override void VisitObjectSyntaxNode(ObjectSyntaxNode objectSyntaxNode)
     {
         VisitTypeDeclarationSyntaxNode(objectSyntaxNode);
-        base.VisitObjectSyntaxNode(objectSyntaxNode);
     }
 
     public override void VisitClassSyntaxNode(ClassSyntaxNode classSyntaxNode)
     {
         VisitTypeDeclarationSyntaxNode(classSyntaxNode);
-        base.VisitClassSyntaxNode(classSyntaxNode);
     }
 
     public override void VisitPackageSyntaxNode(PackageSyntaxNode packageSyntaxNode)
     {
         VisitTypeDeclarationSyntaxNode(packageSyntaxNode);
-        base.VisitPackageSyntaxNode(packageSyntaxNode);
     }
 
     public override void VisitRelationSyntaxNode(RelationSyntaxNode relationSyntaxNode)
     {
         relationSyntaxNode.ThrowIfNull();
+        _stringBuilder.PrepareForNextElement();
 
-        Visit(relationSyntaxNode.Left);
-        VisitRelationArrowSyntaxNode(relationSyntaxNode.Arrow);
-        Visit(relationSyntaxNode.Right);
-        _stringBuilder.AppendLine();
+        ContinueVisitIdentifierSyntaxNode(relationSyntaxNode.Left);
+        ContinueVisitRelationArrowSyntaxNode(relationSyntaxNode.Arrow);
+        ContinueVisitIdentifierSyntaxNode(relationSyntaxNode.Right);
     }
 
     public override void VisitRelationArrowSyntaxNode(RelationArrowSyntaxNode relationArrowSyntaxNode)
     {
         relationArrowSyntaxNode.ThrowIfNull();
+        _stringBuilder.PrepareForNextElement();
 
+        ContinueVisitRelationArrowSyntaxNode(relationArrowSyntaxNode);
+    }
+
+    private void VisitTypeDeclarationSyntaxNode(TypeDeclarationSyntaxNode typeDeclarationSyntaxNode)
+    {
+        typeDeclarationSyntaxNode.ThrowIfNull();
+        _stringBuilder.PrepareForNextElement();
+
+        _stringBuilder
+            .Append(EnumStringValue.ToEnumString(typeDeclarationSyntaxNode.Type))
+            .Append(' ');
+        ContinueVisitIdentifierSyntaxNode(typeDeclarationSyntaxNode.Identifier);
+        VisitChildren(typeDeclarationSyntaxNode);
+    }
+
+    private void VisitChildren(PlantUmlSyntaxNode typeDeclarationSyntaxNode)
+    {
+        _stringBuilder.Append(" {");
+
+        if (typeDeclarationSyntaxNode.Children.IsEmpty)
+        {
+            _stringBuilder.Append(" }");
+            return;
+        }
+
+        _stringBuilder.IncreaseNesting();
+        VisitDefault(typeDeclarationSyntaxNode);
+        _stringBuilder.DecreaseNesting();
+        _stringBuilder.PrepareForNextElement();
+        _stringBuilder.Append("}");
+    }
+
+    private void ContinueVisitIdentifierSyntaxNode(IdentifierSyntaxNode identifierSyntaxNode)
+    {
+        _stringBuilder.Append(identifierSyntaxNode.Name);
+        base.VisitIdentifierSyntaxNode(identifierSyntaxNode);
+    }
+
+    private void ContinueVisitRelationArrowSyntaxNode(RelationArrowSyntaxNode relationArrowSyntaxNode)
+    {
         char arrowChar = relationArrowSyntaxNode.IsDotted ? '.' : '-';
 
         _stringBuilder
@@ -64,19 +100,6 @@ public class DiagramBuilderSyntaxVisitor : PlantUmlSyntaxVisitor
             .Append(arrowChar)
             .Append(ToArrowString(relationArrowSyntaxNode.RelationType))
             .Append(' ');
-    }
-
-    private void VisitTypeDeclarationSyntaxNode(TypeDeclarationSyntaxNode typeDeclarationSyntaxNode)
-    {
-        typeDeclarationSyntaxNode.ThrowIfNull();
-
-        _stringBuilder
-            .Append(EnumStringValue.ToEnumString(typeDeclarationSyntaxNode.Type))
-            .Append(' ');
-        Visit(typeDeclarationSyntaxNode.Identifier);
-        _stringBuilder
-            .Append(" { }")
-            .AppendLine();
     }
 
     private string ToDiagramSymbol(RelationSuggestLocationDirection? directory)

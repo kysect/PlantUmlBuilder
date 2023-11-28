@@ -47,8 +47,10 @@ public abstract class PlantUmlSyntaxVisitor
         VisitDefault(relationArrowSyntaxNode);
     }
 
-    private void VisitDefault(PlantUmlSyntaxNode node)
+    public void VisitDefault(PlantUmlSyntaxNode node)
     {
+        node.ThrowIfNull();
+
         foreach (PlantUmlSyntaxNode syntaxNode in node.Children)
             syntaxNode.Visit(this);
     }

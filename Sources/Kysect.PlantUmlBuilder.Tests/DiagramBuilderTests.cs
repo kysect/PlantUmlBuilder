@@ -2,6 +2,7 @@ using FluentAssertions;
 using Kysect.PlantUmlBuilder.StringBuilding;
 using Kysect.PlantUmlBuilder.Syntax;
 using Kysect.PlantUmlBuilder.Syntax.Enums;
+using Kysect.PlantUmlBuilder.SyntaxTreeBuilding;
 
 namespace Kysect.PlantUmlBuilder.Tests;
 
@@ -69,6 +70,25 @@ public class DiagramBuilderTests
 
         var tree = new DiagramSyntaxTree()
             .AddChild(new PackageSyntaxNode(new IdentifierSyntaxNode("TypeName")));
+
+        Verify(tree, expected);
+    }
+
+    [Test]
+    public void Build_PackageInsidePackage_RenderedCorrectly()
+    {
+        string expected = $$"""
+                          @startuml
+                          package A {
+                          {{'\t'}}package B { }
+                          }
+                          @enduml
+                          """;
+
+        var tree = new DiagramSyntaxTree()
+            .AddChild(
+                new PackageSyntaxNode(new IdentifierSyntaxNode("A"))
+                    .AddMember(new PackageSyntaxNode(new IdentifierSyntaxNode("B"))));
 
         Verify(tree, expected);
     }

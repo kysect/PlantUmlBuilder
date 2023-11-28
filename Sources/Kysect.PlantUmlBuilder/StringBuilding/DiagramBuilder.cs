@@ -1,6 +1,5 @@
 ﻿using Kysect.CommonLib.BaseTypes.Extensions;
 using Kysect.PlantUmlBuilder.Syntax;
-using System.Text;
 
 namespace Kysect.PlantUmlBuilder.StringBuilding;
 
@@ -10,15 +9,17 @@ public class DiagramBuilder : IDiagramBuilder
     {
         tree.ThrowIfNull();
 
-        var stringBuilder = new StringBuilder();
+        var stringBuilder = new SyntaxStringBuilder();
         var visitor = new DiagramBuilderSyntaxVisitor(stringBuilder);
 
-        stringBuilder.AppendLine(PlantUmlConstants.StartUml);
+        stringBuilder.PrepareForNextElement();
+        stringBuilder.Append(PlantUmlConstants.StartUml);
 
         foreach (PlantUmlSyntaxNode plantUmlSyntaxNode in tree.Children)
             visitor.Visit(plantUmlSyntaxNode);
 
-        stringBuilder.AppendLine(PlantUmlConstants.EndUml);
+        stringBuilder.PrepareForNextElement();
+        stringBuilder.Append(PlantUmlConstants.EndUml);
 
         return stringBuilder.ToString().Trim();
     }
