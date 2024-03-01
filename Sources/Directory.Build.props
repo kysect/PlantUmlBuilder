@@ -1,11 +1,20 @@
 <Project>
-    <PropertyGroup>
-        <Authors>Kysect</Authors>
-		<Company>Kysect</Company>
-
-	    <Nullable>enable</Nullable>
-        <LangVersion>latest</LangVersion>
-        <ImplicitUsings>enable</ImplicitUsings>
-		<UseArtifactsOutput>true</UseArtifactsOutput>
-    </PropertyGroup>
+  <PropertyGroup>
+    <Authors>Kysect</Authors>
+    <Company>Kysect</Company>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+    <Copyright>Copyright (c) Kysect 2024</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <DebugType>portable</DebugType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Kysect.Editorconfig" />
+  </ItemGroup>
 </Project>
