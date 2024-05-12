@@ -1,23 +1,27 @@
 <Project>
   <PropertyGroup>
-    <Authors>Kysect</Authors>
-    <Company>Kysect</Company>
-    <Nullable>enable</Nullable>
-    <LangVersion>latest</LangVersion>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UseArtifactsOutput>true</UseArtifactsOutput>
-    <Copyright>Copyright (c) Kysect 2024</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryType>git</RepositoryType>
-    <DebugType>portable</DebugType>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Description>Kysect.PlantUmlBuilder is NuGet with typed builders for creating diagram description in PlantUML DSL.</Description>
+    <RepositoryUrl>https://github.com/Kysect/PlantUmlBuilder</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Kysect/PlantUmlBuilder</PackageProjectUrl>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <UseArtifactsOuptput>true</UseArtifactsOuptput>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Kysect.Editorconfig" />
+    <None Include="$(MSBuildThisFileDirectory)../README.md" Pack="true" PackagePath="/Readme.md" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MinVer">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Kysect.SolutionDefaults">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 </Project>
