@@ -1,8 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <NoWarn>$(NoWarn);1701;1702;CA1707</NoWarn>
@@ -19,5 +17,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kysect.PlantUmlBuilder\Kysect.PlantUmlBuilder.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="Kysect.SolutionDefaults">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 
 > This is experimental prototype, API may be changed.
 
-Kysect.PlantUmlBuilder is a Nuget library and serves as an API designed for the creation and modification of the syntax tree for the PlantUML DSL and provides functionality to generate a string-based representation of the diagram based on the constructed syntax tree.
+Kysect.PlantUmlBuilder is a Nuget library for the creation and modification of the syntax tree for the PlantUML DSL and provides functionality to generate a string-based representation of the diagram based on the constructed syntax tree.
 
 ## Sample
 
